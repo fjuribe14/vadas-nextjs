@@ -1,5 +1,9 @@
 import "./globals.css";
+import Link from "next/link";
 import type { Metadata } from "next";
+import Logo from "@/components/logo";
+import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
@@ -14,13 +18,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased">
+      <body className="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 font-body antialiased">
         <ThemeProvider
           enableSystem
           attribute="class"
           defaultTheme="system"
           disableTransitionOnChange>
-          {children}
+          <div className="flex flex-col min-h-screen">
+            <header className="px-4 lg:px-6 h-14 flex items-center gap-4 relative">
+              <Link
+                className="flex items-center justify-center absolute transform -translate-x-1/2 left-1/2"
+                href="/">
+                <Logo className="h-8" />
+              </Link>
+
+              <div className="ml-auto">
+                <ModeToggle />
+              </div>
+            </header>
+            {children}
+          </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
