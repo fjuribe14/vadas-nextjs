@@ -1,16 +1,52 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Card,
-  CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
+  CardHeader,
   CardFooter,
+  CardContent,
+  CardDescription,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Check, GlassWater, Music, Camera, Clapperboard, Speaker, Users } from "lucide-react";
-import Link from "next/link";
 
 export default function PricingPage() {
+  const combos = [
+    {
+      nombre: "Paquete Básico",
+      precio: "$999",
+      descripcion: "Perfecto para eventos pequeños",
+      servicios: ["Bar móvil", "DJ por 4 horas", "Fotógrafo"],
+      iconos: [GlassWater, Music, Camera],
+    },
+    {
+      nombre: "Paquete Premium",
+      precio: "$1999",
+      descripcion: "Ideal para eventos medianos",
+      servicios: [
+        "Bar móvil premium",
+        "Banda en vivo por 3 horas",
+        "Fotógrafo y videógrafo",
+        "Cabina de fotos 360°",
+      ],
+      iconos: [GlassWater, Music, Camera, Clapperboard],
+    },
+    {
+      nombre: "Paquete Todo Incluido",
+      precio: "$3999",
+      descripcion: "La experiencia completa para grandes eventos",
+      servicios: [
+        "Bar móvil premium",
+        "Banda en vivo y DJ",
+        "Fotógrafo y videógrafo",
+        "Cabina de fotos 360°",
+        "Sonido e iluminación profesional",
+        "Personal de servicio",
+      ],
+      iconos: [GlassWater, Music, Camera, Clapperboard, Speaker, Users],
+    },
+  ];
+
   return (
     <>
       <section className="w-full py-12 md:py-24 lg:py-32 bg-neutral-100 dark:bg-neutral-900">
@@ -52,39 +88,3 @@ export default function PricingPage() {
     </>
   );
 }
-
-export const combos = [
-  {
-    nombre: "Paquete Básico",
-    precio: "$999",
-    descripcion: "Perfecto para eventos pequeños",
-    servicios: ["Bar móvil", "DJ por 4 horas", "Fotógrafo"],
-    iconos: [GlassWater, Music, Camera],
-  },
-  {
-    nombre: "Paquete Premium",
-    precio: "$1999",
-    descripcion: "Ideal para eventos medianos",
-    servicios: [
-      "Bar móvil premium",
-      "Banda en vivo por 3 horas",
-      "Fotógrafo y videógrafo",
-      "Cabina de fotos 360°",
-    ],
-    iconos: [GlassWater, Music, Camera, Clapperboard],
-  },
-  {
-    nombre: "Paquete Todo Incluido",
-    precio: "$3999",
-    descripcion: "La experiencia completa para grandes eventos",
-    servicios: [
-      "Bar móvil premium",
-      "Banda en vivo y DJ",
-      "Fotógrafo y videógrafo",
-      "Cabina de fotos 360°",
-      "Sonido e iluminación profesional",
-      "Personal de servicio",
-    ],
-    iconos: [GlassWater, Music, Camera, Clapperboard, Speaker, Users],
-  },
-];
