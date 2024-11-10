@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,8 +10,8 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
+      body: ["Inter", "sans-serif"],
       display: ["Corben", "cursive"],
-      body: ['"Inter"', "sans-serif"],
     },
     extend: {
       colors: {

@@ -2,142 +2,150 @@
 
 import {
   Card,
-  CardContent,
-  CardDescription,
+  CardTitle,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardContent,
+  CardDescription,
 } from "@/components/ui/card";
+import { toast } from "sonner";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { CreditCard, HandCoins, Apple } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { CreditCard, Banknote, Smartphone, CheckCircle } from "lucide-react";
 
 export default function CheckoutPage() {
-  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+  const [paymentMethod, setPaymentMethod] = useState("efectivo");
+
+  const combo = {
+    nombre: "Paquete Premium",
+    precio: 1999,
+    servicios: [
+      "Bar móvil premium",
+      "Banda en vivo por 3 horas",
+      "Fotógrafo y videógrafo",
+      "Cabina de fotos 360°",
+    ],
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Aquí iría la lógica para procesar el pago
+    // console.log("Procesando pago con método:", paymentMethod);
+    toast("Su pago se ha realizado con exito y se esta procesando su pedido.", {
+      icon: <CheckCircle className="h-4 w-4" />,
+      onAutoClose() {
+        window.location.href = "/"; // Redirigir a la página de inicio después de 3 segundos
+      },
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">Checkout</h1>
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* Ticket Summary */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Ticket Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between">
-                  <span>Event:</span>
-                  <span className="font-semibold">Rock Fest 2023</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Date:</span>
-                  <span>July 15, 2023</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Venue:</span>
-                  <span>Central Park, NY</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Quantity:</span>
-                  <span>2 tickets</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Price per ticket:</span>
-                  <span>$75.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Fees:</span>
-                  <span>$10.00</span>
-                </div>
-                <div className="border-t pt-4 flex justify-between font-bold">
-                  <span>Total:</span>
-                  <span>$160.00</span>
-                </div>
+    <div className="min-h-screen bg-neutral-100 dark:bg-neutral-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto">
+        <Card>
+          <CardHeader>
+            <CardTitle>Finalizar Compra</CardTitle>
+            <CardDescription>Revisa tu pedido y selecciona el método de pago</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-lg mb-4">{combo.nombre}</h3>
+                <ul className="list-disc list-inside text-sm text-neutral-400">
+                  {combo.servicios.map((servicio, index) => (
+                    <li key={index}>{servicio}</li>
+                  ))}
+                </ul>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Payment Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Payment Details</CardTitle>
-              <CardDescription>Choose your payment method and enter your details.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold">Total:</span>
+                <span className="text-2xl font-bold">€{combo.precio}</span>
+              </div>
+              <form onSubmit={handleSubmit}>
                 <RadioGroup
-                  defaultValue="credit-card"
-                  className="grid gap-4 mb-6"
-                  onValueChange={setPaymentMethod}>
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
+                  className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="credit-card" id="credit-card" />
-                    <Label htmlFor="credit-card" className="flex items-center">
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Credit Card
+                    <RadioGroupItem value="efectivo" id="efectivo" />
+                    <Label htmlFor="efectivo" className="flex items-center space-x-2">
+                      <Banknote className="h-4 w-4" />
+                      <span>Efectivo</span>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="paypal" id="paypal" />
-                    <Label htmlFor="paypal" className="flex items-center">
-                      <HandCoins className="w-4 h-4 mr-2" />
-                      PayPal
+                    <RadioGroupItem value="c2p" id="c2p" />
+                    <Label htmlFor="c2p" className="flex items-center space-x-2">
+                      <Smartphone className="h-4 w-4" />
+                      <span>Pago C2P</span>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="apple-pay" id="apple-pay" />
-                    <Label htmlFor="apple-pay" className="flex items-center">
-                      <Apple className="w-4 h-4 mr-2" />
-                      Apple Pay
+                    <RadioGroupItem value="r4" id="r4" />
+                    <Label htmlFor="r4" className="flex items-center space-x-2">
+                      <CreditCard className="h-4 w-4" />
+                      <span>R4 Sencillo</span>
                     </Label>
                   </div>
                 </RadioGroup>
-
-                {paymentMethod === "credit-card" && (
-                  <div className="space-y-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="card-number">Card Number</Label>
-                      <Input id="card-number" placeholder="1234 5678 9012 3456" />
+                {paymentMethod === "efectivo" && (
+                  <div className="mt-4">
+                    <Label htmlFor="monto">Monto con el que pagará</Label>
+                    <Input
+                      type="number"
+                      id="monto"
+                      placeholder="Ingrese el monto"
+                      className="mt-1"
+                    />
+                  </div>
+                )}
+                {paymentMethod === "c2p" && (
+                  <div className="mt-4">
+                    <Label htmlFor="telefono">Número de teléfono</Label>
+                    <Input
+                      type="tel"
+                      id="telefono"
+                      placeholder="Ingrese su número de teléfono"
+                      className="mt-1"
+                    />
+                  </div>
+                )}
+                {paymentMethod === "r4" && (
+                  <div className="mt-4 space-y-2">
+                    <div>
+                      <Label htmlFor="tarjeta">Número de tarjeta</Label>
+                      <Input
+                        type="text"
+                        id="tarjeta"
+                        placeholder="1234 5678 9012 3456"
+                        className="mt-1"
+                      />
                     </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="card-name">Name on Card</Label>
-                      <Input id="card-name" placeholder="John Doe" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="expiry-date">Expiry Date</Label>
-                        <Input id="expiry-date" placeholder="MM/YY" />
+                    <div className="flex space-x-2">
+                      <div className="flex-1">
+                        <Label htmlFor="fecha">Fecha de expiración</Label>
+                        <Input type="text" id="fecha" placeholder="MM/AA" className="mt-1" />
                       </div>
-                      <div className="grid gap-2">
+                      <div className="flex-1">
                         <Label htmlFor="cvv">CVV</Label>
-                        <Input id="cvv" placeholder="123" />
+                        <Input type="text" id="cvv" placeholder="123" className="mt-1" />
                       </div>
                     </div>
                   </div>
                 )}
-
-                {paymentMethod === "paypal" && (
-                  <div className="text-center">
-                    <p>You will be redirected to PayPal to complete your purchase.</p>
-                  </div>
-                )}
-
-                {paymentMethod === "apple-pay" && (
-                  <div className="text-center">
-                    <p>Complete your purchase with Apple Pay.</p>
-                  </div>
-                )}
+                <Button type="submit" className="w-full mt-6">
+                  Pagar ahora
+                </Button>
               </form>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Complete Purchase</Button>
-            </CardFooter>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+          <CardFooter className="text-sm text-neutral-400">
+            Tus datos de pago están seguros y encriptados.
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );
