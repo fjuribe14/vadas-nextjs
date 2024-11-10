@@ -1,7 +1,7 @@
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar";
 import { Inter, Corben } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
