@@ -1,24 +1,33 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Logo from "@/components/logo";
+import Logo from "@/components/Logo";
 import { ServicesType } from "@/types";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function ServicesList() {
   return (
     <>
+      <div className="py-20">
+        <h1 className="text-3xl font-bold tracking-tighter flex justify-center gap-4 sm:text-4xl md:text-5xl lg:text-6xl/none">
+          Servicios
+        </h1>
+      </div>
       {ServicesArr.map((item, index) => (
         <div key={item.id}>
           <section className="w-full lg:h-[80vh] grid grid-cols-1 md:grid-cols-5 relative">
             <Image
+              priority
               width={2000}
               height={2000}
+              placeholder="blur"
               alt={`service_${index + 1}.webp`}
               src={`/service_${index + 1}.webp`}
               className={cn([
                 "absolute hidden md:block w-full h-full inset-0 -z-10",
                 item.imageClass,
               ])}
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
             />
 
             <div
@@ -26,12 +35,14 @@ export default function ServicesList() {
                 index % 2 !== 0 ? "lg:col-start-4" : "lg:col-start-1",
                 "relative overflow-hidden bg-neutral-100 dark:bg-neutral-900 md:col-span-3 lg:col-span-2 p-12 flex flex-col gap-8",
               ])}>
-              <h1 className="text-3xl font-bold font-display">{item.title}</h1>
-              <h3 className="text-xl font-light text-neutral-400">{item.subtitle}</h3>
+              <h1 className="text-3xl font-bold">{item.title}</h1>
+              <h2 className="text-xl font-light text-neutral-400">{item.subtitle}</h2>
               <p
-                className="text-neutral-400"
+                className="text-neutral-400 font-body"
                 dangerouslySetInnerHTML={{ __html: item.description }}></p>
-              <Button className="self-start">{"Precios ->"}</Button>
+              <Button className="self-start" asChild>
+                <Link href="/pricing">Precios</Link>
+              </Button>
 
               <Logo className="absolute select-none w-[20%] h-auto transform bottom-12 right-12 -rotate-[25deg] opacity-20 z-[1]" />
             </div>
