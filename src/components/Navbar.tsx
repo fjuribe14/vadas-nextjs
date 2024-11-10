@@ -1,4 +1,4 @@
-import Logo from "./Logo";
+import Logo from "./logo";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import { Instagram, Mail, Phone } from "lucide-react";

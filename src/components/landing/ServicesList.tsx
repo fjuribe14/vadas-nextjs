@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Logo from "@/components/Logo";
+import Logo from "@/components/logo";
 import { ServicesType } from "@/types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
