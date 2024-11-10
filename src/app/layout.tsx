@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { Inter, Corben } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ServicesArr } from "@/components/landing/ServicesList";
-import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   preload: true,
